@@ -1,21 +1,42 @@
 #include "ofMain.h"
 #include "ramMain.h"
 
+#include "ramBaseScene.h"
+#include "ramBaseFilter.h"
 
-class MyScene : public ramBaseScene
+class MyFilter : public ramBaseFilter
 {
-public:
 	
-	string getName() const { return "my name"; }
+public:
+	string getName() const { return "myfilter"; }
 	
 	void setupControlPanel()
 	{
+		ramGetGUI().getCurrentUIContext()->addSlider("test", 0.0, 1.0, 0.5);
+	}
+	const ramNodeArray& filter(const ramNodeArray& src)
+	{
+		return src;
+	}
+	
+};
+
+class MyScene : public ramBaseScene
+{
+	MyFilter f;
+public:
+	
+	string getName() const { return "my name" + ofToString(ofRandomf()); }
+	
+	void setupControlPanel()
+	{
+		f.setupControlPanel();
 		ramGetGUI().getCurrentUIContext()->addFPS();
 	}
 };
 
-
-MyScene scene;
+MyScene scene, scene2;
+MyFilter filter;
 
 class ofApp : public ofBaseApp
 {
@@ -27,12 +48,11 @@ public:
 		ofSetFrameRate(60);
 		ofSetVerticalSync(true);
 		
-		
 		ramGetGUI().setup();
 		ramGetSceneManager().addScene(&scene);
+		ramGetSceneManager().addScene(&scene2);
 		
-		
-		
+		ramGetGUI().addPanel(&filter);
 	}
 	
 	void update()

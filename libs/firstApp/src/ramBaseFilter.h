@@ -2,13 +2,13 @@
 #include "ramUnit.h"
 #include "ramActor.h"
 
-
-
 class ramBaseFilter : public ramUnit
 {
 public:
+	
 	const ramNodeArray& operator()(const ramNodeArray& src);
 	const ramNodeArray& update(const ramNodeArray& src);
+	
 	virtual const ramNodeArray& get(size_t index = 0) const;
 	virtual size_t getSize() const;
 	
