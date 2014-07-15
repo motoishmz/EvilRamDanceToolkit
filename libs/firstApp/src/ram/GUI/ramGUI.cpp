@@ -21,6 +21,19 @@ ramGUI& ramGUI::instance()
 
 
 #pragma mark -
+#pragma mark private constructors
+ramGUI::ramGUI()
+: gui_ready(false)
+{}
+ramGUI::ramGUI(const ramGUI&)
+: gui_ready(false)
+{}
+ramGUI& ramGUI::operator=(const ramGUI&)
+{ return *this; }
+
+
+
+#pragma mark -
 #pragma mark ...
 void ramGUI::setup()
 {
@@ -43,11 +56,19 @@ void ramGUI::setup()
         gui_tab_bar->addCanvas(gui);
         gui_panels.push_back(gui);
     }
+	
+	gui_ready = true;
 }
 
 
 void ramGUI::addPanel(ramUnit* unit)
 {
+	if (!ready())
+	{
+		ofLogWarning(__FUNCTION__) << "Skipped adding panel because GUI is not ready. Call ramGUI::setup() first.";
+		return;
+	}
+	
 	ofxUICanvas* panel = new ofxUICanvas();
 	current_panel_context = panel;
 	
@@ -59,6 +80,10 @@ void ramGUI::addPanel(ramUnit* unit)
 	gui_panels.push_back(panel);
 }
 
+bool ramGUI::ready()
+{
+	return gui_ready;
+}
 
 ofxUICanvas* ramGUI::getCurrentUIContext()
 {

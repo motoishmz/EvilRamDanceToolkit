@@ -11,6 +11,8 @@ public:
 	void setup();
 	void addPanel(ramUnit* unit);
 	
+	bool ready();
+	
 	ofxUICanvas* getCurrentUIContext();
 	
 protected:
@@ -20,9 +22,10 @@ protected:
 	
 private:
 	static ramGUI *our_instance;
-	ramGUI(){}
-	ramGUI(const ramGUI &other){}
-	ramGUI &operator=(const ramGUI &other){}
+	ramGUI();
+	ramGUI(const ramGUI &other);
+	ramGUI &operator=(const ramGUI &other);
 	
+	bool gui_ready;
 	ofxUICanvas* current_panel_context;
 };

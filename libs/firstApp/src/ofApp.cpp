@@ -48,7 +48,7 @@ public:
 		ofSetFrameRate(60);
 		ofSetVerticalSync(true);
 		
-		ramGetGUI().setup();
+//		ramGetGUI().setup();
 		ramGetSceneManager().addScene(&scene);
 		ramGetSceneManager().addScene(&scene2);
 		
