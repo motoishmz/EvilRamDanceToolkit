@@ -12,13 +12,14 @@ public:
 	static ramSceneManager& instance();
 	
 	void setup();
+	void update();
+	void draw();
+	void exit();
+	
 	void addScene(ramBaseScene*);
 	
 protected:
 	
-	void update(ofEventArgs &e);
-	void draw(ofEventArgs &e);
-	void exit(ofEventArgs &e);
 	
 	void actorEnter(ramActor &actor);
 	void actorExit(ramActor &actor);

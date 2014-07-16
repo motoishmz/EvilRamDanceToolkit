@@ -25,7 +25,6 @@ public:
 	void drawNodeName(int floatPos = 20) const;
 	
 	//! accessors ramNode
-//	inline void setName(const string name);
 	const int getID() const;
 	const string& getName() const;
 	

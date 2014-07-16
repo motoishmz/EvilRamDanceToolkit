@@ -35,35 +35,27 @@ ramSceneManager& ramSceneManager::operator=(const ramSceneManager&)
 #pragma mark setup, update, draw, exit...
 void ramSceneManager::setup()
 {
-	//! driving ramSceneManager::update, draw, exit
-	ofAddListener(ofEvents().update, this, &ramSceneManager::update);
-	ofAddListener(ofEvents().draw, this, &ramSceneManager::draw);
-	ofAddListener(ofEvents().exit, this, &ramSceneManager::exit);
-	
 	//! listening the entity enter/exit event
 	ofAddListener(ramActorManager::instance().actorEnter, this, &ramSceneManager::actorEnter);
 	ofAddListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
 	ofAddListener(ramActorManager::instance().rigidEnter, this, &ramSceneManager::rigidEnter);
 	ofAddListener(ramActorManager::instance().rigidExit, this, &ramSceneManager::rigidExit);
 }
-void ramSceneManager::update(ofEventArgs &e)
+void ramSceneManager::update()
 {
 
 }
-void ramSceneManager::draw(ofEventArgs &e)
+void ramSceneManager::draw()
 {
 	
 }
-void ramSceneManager::exit(ofEventArgs &e)
+void ramSceneManager::exit()
 {
 	for (int i = 0; i < scenes.size(); i++)
 	{
 		scenes[i]->exit();
 	}
 
-	ofRemoveListener(ofEvents().update, this, &ramSceneManager::update);
-	ofRemoveListener(ofEvents().draw, this, &ramSceneManager::draw);
-	ofRemoveListener(ofEvents().exit, this, &ramSceneManager::exit);
 	ofRemoveListener(ramActorManager::instance().actorEnter, this, &ramSceneManager::actorEnter);
 	ofRemoveListener(ramActorManager::instance().actorExit, this, &ramSceneManager::actorExit);
 	ofRemoveListener(ramActorManager::instance().rigidEnter, this, &ramSceneManager::rigidEnter);

@@ -29,15 +29,15 @@ ramNodeArray::~ramNodeArray()
 /*!
  timestamps
  */
-inline bool ramNodeArray::isOutdated() const
+bool ramNodeArray::isOutdated() const
 {
 	return (ofGetElapsedTimef() - last_update_client_time) > RAM_OUTDATED_DURATION;
 }
-inline float ramNodeArray::getTimestamp() const
+float ramNodeArray::getTimestamp() const
 {
 	return last_update_client_time;
 }
-inline void ramNodeArray::setTimestamp(const float t)
+void ramNodeArray::setTimestamp(const float t)
 {
 	last_update_client_time = t;
 }
@@ -45,19 +45,19 @@ inline void ramNodeArray::setTimestamp(const float t)
 /*!
  type
  */
-inline void ramNodeArray::setType(ramNodeArrayType type)
+void ramNodeArray::setType(ramNodeArrayType type)
 {
 	this->type = type;
 }
-inline bool ramNodeArray::isActor() const
+bool ramNodeArray::isActor() const
 {
 	return type == RAM_NODEARRAY_TYPE_ACTOR;
 }
-inline bool ramNodeArray::isRigid() const
+bool ramNodeArray::isRigid() const
 {
 	return type == RAM_NODEARRAY_TYPE_RIGIDBODY;
 }
-inline bool ramNodeArray::isTypeOf(ramNodeArrayType type) const
+bool ramNodeArray::isTypeOf(ramNodeArrayType type) const
 {
 	return this->type == type;
 }
@@ -65,11 +65,11 @@ inline bool ramNodeArray::isTypeOf(ramNodeArrayType type) const
 /*!
  is_playback
  */
-inline void ramNodeArray::setPlayback(bool b)
+void ramNodeArray::setPlayback(bool b)
 {
 	is_playback = b;
 }
-inline bool ramNodeArray::isPlayback() const
+bool ramNodeArray::isPlayback() const
 {
 	return is_playback;
 }

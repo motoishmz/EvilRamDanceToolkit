@@ -5,20 +5,10 @@
 #include "ramConstants.h"
 #include "ramNode.h"
 
-//
-//// !!!:
-//enum ramNodeArrayType
-//{
-//	RAM_NODEARRAY_TYPE_ACTOR     = 0,
-//	RAM_NODEARRAY_TYPE_RIGIDBODY = 1
-//};
-
-
 class ramNodeArray
 {
 	
 protected:
-	// !!!:
 	
 public:
 	

@@ -1,6 +1,7 @@
 #include "ramActorManager.h"
 #include "ramConstants.h"
-#include "ramNodeSelector.h"
+#include "ramNodeFinder.h"
+
 
 
 #pragma mark -
@@ -111,32 +112,32 @@ void ramActorManager::exit()
 
 #pragma mark -
 #pragma mark accessor: nodearrays
-inline size_t ramActorManager::getNumNodeArray()
+size_t ramActorManager::getNumNodeArray()
 {
 	return nodearrays.size();
 }
 
-inline bool ramActorManager::hasNodeArray(const string &key)
+bool ramActorManager::hasNodeArray(const string &key)
 {
 	return nodearrays.hasKey(key);
 }
 
-inline ramNodeArray& ramActorManager::getNodeArray(const string& name)
+ramNodeArray& ramActorManager::getNodeArray(const string& name)
 {
 	return nodearrays[name];
 }
 
-inline ramNodeArray& ramActorManager::getNodeArray(int index)
+ramNodeArray& ramActorManager::getNodeArray(int index)
 {
 	return nodearrays[index];
 }
 
-inline vector<ramNodeArray*> ramActorManager::getAllNodeArrays()
+vector<ramNodeArray*> ramActorManager::getAllNodeArrays()
 {
 	return nodearrays.all();
 }
 
-inline const vector<string>& ramActorManager::getNodeArrayNames()
+const vector<string>& ramActorManager::getNodeArrayNames()
 {
 	return nodearrays.keys();
 }
@@ -181,19 +182,18 @@ void ramActorManager::clearSelected()
 
 
 
-
 #pragma mark -
 #pragma mark freeze/unfreeze all actors
-inline bool ramActorManager::isFreezed() const
+bool ramActorManager::isFreezed() const
 {
 	return freeze;
 }
 
-inline void ramActorManager::setFreezed(bool freezed)
+void ramActorManager::setFreezed(bool freezed)
 {
 	freeze = freezed;
 }
-inline void ramActorManager::toggleFreeze()
+void ramActorManager::toggleFreeze()
 {
 	freeze ^= true;
 }
@@ -254,7 +254,6 @@ void ramActorManager::updateWithOscMessage(ofxOscMessage& m)
 
 void ramActorManager::setupOscReceiver(ramOscManager* oscMan)
 {
-	
 	oscReceiver.addAddress(RAM_OSC_ADDR_ACTOR);
 	oscReceiver.addAddress(RAM_OSC_ADDR_RIGID_BODY);
 	

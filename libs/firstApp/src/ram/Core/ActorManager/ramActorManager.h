@@ -1,12 +1,12 @@
 #pragma once
 #include "ofEvents.h"
 #include "ofxOscMessage.h"
+#include "ramOscManager.h"
+#include "ramCompoundContainer.h"
 #include "ramActor.h"
 #include "ramRigidBody.h"
 #include "ramInteractivePrimitive.h"
 #include "ramNodeIdentifier.h"
-#include "ramCompoundContainer.h"
-#include "ramOscManager.h"
 
 class ramActorManager
 {
@@ -90,4 +90,6 @@ private:
 
 
 
-
+#pragma mark -
+#pragma mark implementation ramActorManager::NodeSelector
+#include "ramNodeSelector.h"

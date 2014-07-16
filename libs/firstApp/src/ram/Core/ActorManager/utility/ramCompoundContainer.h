@@ -1,4 +1,5 @@
 #pragma once
+
 #include "ramNodeArray.h"
 
 class ramCompoundContainer
@@ -22,8 +23,6 @@ public:
 	ramNodeArray& operator[](const string& key);
 	const vector<string>& keys();
 	bool hasKey(const string& key);
-	
-	
 	
 	void updateIndexCache();
 	

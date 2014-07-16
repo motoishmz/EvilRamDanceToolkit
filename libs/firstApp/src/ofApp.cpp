@@ -1,8 +1,6 @@
 #include "ofMain.h"
-#include "ramMain.h"
+#include "ramBaseApp.h"
 
-#include "ramBaseScene.h"
-#include "ramBaseFilter.h"
 
 class MyFilter : public ramBaseFilter
 {
@@ -38,7 +36,10 @@ public:
 MyScene scene, scene2;
 MyFilter filter;
 
-class ofApp : public ofBaseApp
+
+
+
+class ofApp : public ramBaseApp
 {
 	
 public:
@@ -52,15 +53,21 @@ public:
 		ramGetGUI().addPanel(&filter);
 		ramGetSceneManager().addScene(&scene);
 		ramGetSceneManager().addScene(&scene2);
+		
+		ramGetActorManager().setup();
+		ramGetSceneManager().setup();
 	}
 	
 	void update()
 	{
+		ramGetActorManager().update();
+		ramGetSceneManager().update();
 	}
 	
 	void draw()
 	{
-		
+		ramGetActorManager().draw();
+		ramGetSceneManager().draw();
 	}
 	
 	void keyPressed(int key)

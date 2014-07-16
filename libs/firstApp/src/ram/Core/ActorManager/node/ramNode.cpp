@@ -76,15 +76,15 @@ const ofMatrix4x4& ramNode::getMatrix() const
 {
 	return getLocalTransformMatrix();
 }
-inline bool ramNode::hasParent() const
+bool ramNode::hasParent() const
 {
 	return parent != NULL;
 }
-inline ramNode* ramNode::getParent() const
+ramNode* ramNode::getParent() const
 {
 	return (ramNode*)parent;
 }
-inline void ramNode::setParent(ramNode &parent)
+void ramNode::setParent(ramNode &parent)
 {
 	this->parent = &parent;
 }
@@ -92,23 +92,23 @@ inline void ramNode::setParent(ramNode &parent)
 
 #pragma mark -
 #pragma mark accessors: ramAccelerometer
-inline ofVec3f ramNode::getVelocity() const
+ofVec3f ramNode::getVelocity() const
 {
 	return accelerometer.velocity;
 }
-inline ofVec3f ramNode::getAcceleration() const
+ofVec3f ramNode::getAcceleration() const
 {
 	return accelerometer.acceleration;
 }
-inline ofQuaternion ramNode::getAngularVelocity() const
+ofQuaternion ramNode::getAngularVelocity() const
 {
 	return accelerometer.angular_velocity;
 }
-inline ofQuaternion ramNode::getAngularAcceleration() const
+ofQuaternion ramNode::getAngularAcceleration() const
 {
 	return accelerometer.angular_acceleration;
 }
-inline ramAccelerometer& ramNode::getAccelerometer()
+ramAccelerometer& ramNode::getAccelerometer()
 {
 	return accelerometer;
 }
@@ -117,11 +117,11 @@ inline ramAccelerometer& ramNode::getAccelerometer()
 #pragma mark -
 #pragma mark operators
 
-inline ramNode::operator ofVec3f() const
+ramNode::operator ofVec3f() const
 {
 	return getGlobalPosition();
 }
-inline bool ramNode::operator==(const ramNode &node) const
+bool ramNode::operator==(const ramNode &node) const
 {
 	const float *m = getLocalTransformMatrix().getPtr();
 	const float *mm = node.getLocalTransformMatrix().getPtr();
@@ -152,11 +152,11 @@ inline bool ramNode::operator==(const ramNode &node) const
 	
 	return true;
 }
-inline bool ramNode::operator!=(const ramNode &node) const
+bool ramNode::operator!=(const ramNode &node) const
 {
 	return !(*this == node);
 }
-inline ramNode ramNode::operator+(const ramNode &node) const
+ramNode ramNode::operator+(const ramNode &node) const
 {
 	ramNode result = *this;
 	
@@ -165,7 +165,7 @@ inline ramNode ramNode::operator+(const ramNode &node) const
 	
 	return result;
 }
-inline ramNode& ramNode::operator+=(const ramNode &node)
+ramNode& ramNode::operator+=(const ramNode &node)
 {
 	ramNode &result = *this;
 	
@@ -174,7 +174,7 @@ inline ramNode& ramNode::operator+=(const ramNode &node)
 	
 	return result;
 }
-inline ramNode ramNode::operator-(const ramNode &node) const
+ramNode ramNode::operator-(const ramNode &node) const
 {
 	ramNode result = *this;
 	
@@ -183,7 +183,7 @@ inline ramNode ramNode::operator-(const ramNode &node) const
 	
 	return result;
 }
-inline ramNode& ramNode::operator-=(const ramNode &node)
+ramNode& ramNode::operator-=(const ramNode &node)
 {
 	ramNode &result = *this;
 	
@@ -192,7 +192,7 @@ inline ramNode& ramNode::operator-=(const ramNode &node)
 	
 	return result;
 }
-inline ramNode& ramNode::lerp(const ramNode &base, float t)
+ramNode& ramNode::lerp(const ramNode &base, float t)
 {
 	const ofMatrix4x4& a = this->getGlobalTransformMatrix();
 	const ofMatrix4x4& b = base.getGlobalTransformMatrix();
@@ -206,14 +206,14 @@ inline ramNode& ramNode::lerp(const ramNode &base, float t)
 	
 	return *this;
 }
-inline ramNode ramNode::getLerpd(const ramNode &base, float t) const
+ramNode ramNode::getLerpd(const ramNode &base, float t) const
 {
 	ramNode result = *this;
 	
 	result.lerp(base, t);
 	return result;
 }
-inline ramNode& ramNode::normalize(const ramNode &base, float length)
+ramNode& ramNode::normalize(const ramNode &base, float length)
 {
 	ramNode &result = *this;
 	
@@ -228,7 +228,7 @@ inline ramNode& ramNode::normalize(const ramNode &base, float length)
 	
 	return result;
 }
-inline ramNode ramNode::getNormalized(const ramNode &base, float length) const
+ramNode ramNode::getNormalized(const ramNode &base, float length) const
 {
 	ramNode result = *this;
 	
@@ -243,7 +243,7 @@ inline ramNode ramNode::getNormalized(const ramNode &base, float length) const
 	
 	return result;
 }
-inline ramNode& ramNode::limit(const ramNode &base, float length)
+ramNode& ramNode::limit(const ramNode &base, float length)
 {
 	ramNode &result = *this;
 	
@@ -257,7 +257,7 @@ inline ramNode& ramNode::limit(const ramNode &base, float length)
 	
 	return result;
 }
-inline ramNode ramNode::getLimited(const ramNode &base, float length) const
+ramNode ramNode::getLimited(const ramNode &base, float length) const
 {
 	ramNode result = *this;
 	
@@ -277,11 +277,11 @@ inline ramNode ramNode::getLimited(const ramNode &base, float length) const
 
 #pragma mark -
 #pragma mark utils...
-inline void ramNode::beginTransform() const
+void ramNode::beginTransform() const
 {
 	transformGL();
 }
-inline void ramNode::endTransform() const
+void ramNode::endTransform() const
 {
 	restoreTransformGL();
 }
