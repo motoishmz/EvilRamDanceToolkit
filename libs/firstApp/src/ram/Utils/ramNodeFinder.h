@@ -3,7 +3,6 @@
 #include "ramNodeIdentifier.h"
 #include "ramGlobalShortcuts.h"
 
-// here
 class ramNodeFinder :  public ramNodeIdentifier
 {
 public:

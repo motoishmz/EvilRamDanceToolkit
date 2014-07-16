@@ -5,6 +5,9 @@
 const std::string RAM_OSC_ADDR_ACTOR = "/ram/skeleton";
 const std::string RAM_OSC_ADDR_RIGID_BODY = "/ram/rigid_body";
 
+const std::string RAM_OSC_ADDR_COMMUNICATE_NOTEON = "/ram/communicate/noteon";
+const std::string RAM_OSC_ADDR_COMMUNICATE_NOTEOFF = "/ram/communicate/noteoff";
+const std::string RAM_OSC_ADDR_COMMUNICATE_CC = "/ram/communicate/cc";
 
 const float RAM_OUTDATED_DURATION = 1.0;
 
@@ -41,5 +44,3 @@ const string jointName[] =
 	"RIGHT_WRIST",
 	"RIGHT_HAND"
 };
-
-
