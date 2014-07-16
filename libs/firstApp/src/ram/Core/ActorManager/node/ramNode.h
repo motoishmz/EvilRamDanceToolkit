@@ -18,7 +18,7 @@ public:
 	ramNode(const ramNode& copy);
 	ramNode& operator=(const ramNode& copy);
 	
-	void update(ofVec3f& vec, ofQuaternion& quat);
+	void update(const ofVec3f& vec, const ofQuaternion& quat);
 	
 	//! draw
 	void drawNodeId(int floatPos = 20) const;

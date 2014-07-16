@@ -1,5 +1,8 @@
 #include "ramNode.h"
 
+
+#pragma mark -
+#pragma mark constructors
 ramNode::ramNode()
 : ofNode()
 , node_id(-1)
@@ -24,7 +27,13 @@ ramNode& ramNode::operator=(const ramNode& copy)
 
 
 #pragma mark -
-#pragma mark draw
+#pragma mark update, draw
+void ramNode::update(const ofVec3f& vec, const ofQuaternion& quat)
+{
+	setGlobalPosition(vec);
+	setGlobalOrientation(quat);
+	accelerometer.update(vec, quat);
+}
 void ramNode::drawNodeId(int floatPos) const
 {
 	ofVec3f pos = getGlobalPosition();

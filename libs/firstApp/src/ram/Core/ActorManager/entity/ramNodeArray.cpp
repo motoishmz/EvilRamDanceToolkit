@@ -3,8 +3,6 @@
 
 
 
-
-
 #pragma mark -
 #pragma mark constructors
 ramNodeArray::ramNodeArray()
@@ -97,11 +95,7 @@ void ramNodeArray::updateWithOscMessage(const ofxOscMessage &m)
 		ramNode &node = getNode(i);
 		node.node_id = i;
 		node.node_name = getJointName(i);
-		
-		
-		node.setGlobalPosition(vec);
-		node.setGlobalOrientation(quat);
-		node.accelerometer.update(vec, quat);
+		node.update(vec, quat);
 	}
 	
 	last_timestamp = current_timestamp;

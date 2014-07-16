@@ -111,9 +111,9 @@ void ramActor::setupTree()
 }
 
 
+
 #pragma mark -
 #pragma mark static
-
 vector<string> ramActor::getJointNames()
 {
 	vector<string> names;

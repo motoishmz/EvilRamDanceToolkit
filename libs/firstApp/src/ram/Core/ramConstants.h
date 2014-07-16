@@ -8,6 +8,11 @@ const std::string RAM_OSC_ADDR_RIGID_BODY = "/ram/rigid_body";
 
 const float RAM_OUTDATED_DURATION = 1.0;
 
+typedef enum
+{
+	RAM_NODEARRAY_TYPE_ACTOR     = 0,
+	RAM_NODEARRAY_TYPE_RIGIDBODY = 1
+} ramNodeArrayType;
 
 const string jointName[] =
 {
