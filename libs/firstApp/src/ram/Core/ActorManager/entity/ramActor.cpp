@@ -28,13 +28,13 @@ ramActor::~ramActor()
 
 
 
-#pragma mark -
-#pragma mark operator
-ramActor& ramActor::operator=(const ramNodeArray &copy)
-{
-	this->ramNodeArray::operator=(copy);
-	return *this;
-}
+//#pragma mark -
+//#pragma mark operator
+//ramActor& ramActor::operator=(const ramNodeArray &copy)
+//{
+//	this->ramNodeArray::operator=(copy);
+//	return *this;
+//}
 
 
 

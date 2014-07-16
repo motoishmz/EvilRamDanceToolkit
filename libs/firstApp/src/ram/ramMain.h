@@ -1,7 +1,3 @@
-
-
-
-
 #include "ramGUI.h"
 
 #include "ramSceneManager.h"

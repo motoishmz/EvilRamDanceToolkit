@@ -6,18 +6,15 @@ class ramRigidBody : public ramNodeArray
 	
 public:
 	
-	void setup()
-	{
-		
-	}
+	ramRigidBody();
+	ramRigidBody(const ramNodeArray &copy) { *this = copy; }
 	
-	void update()
-	{
-		
-	}
+	ramRigidBody& operator=(const ramNodeArray &copy);
 	
-	void draw()
-	{
-		
-	}
+	virtual void updateWithOscMessage(const ofxOscMessage &m);
+	
+private:
+	
+	void reserveNodes(int num);
+
 };

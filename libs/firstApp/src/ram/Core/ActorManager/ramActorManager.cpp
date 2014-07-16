@@ -1,5 +1,6 @@
 #include "ramActorManager.h"
 #include "ramConstants.h"
+#include "ramNodeSelector.h"
 
 
 #pragma mark -
@@ -29,7 +30,178 @@ ramActorManager& ramActorManager::operator=(const ramActorManager&)
 
 
 #pragma mark -
-#pragma mark updateWithOscMessage!
+#pragma mark setup, update, draw, exit...
+void ramActorManager::setup()
+{
+	nodeSelector = new NodeSelector(rootNode);
+	ofAddListener(nodeSelector->selectStateChanged, this, &ramActorManager::onSelectStateChanged);
+	ofAddListener(ofEvents().mouseReleased, this, &ramActorManager::onMouseReleased);
+}
+
+void ramActorManager::update()
+{
+	while (oscReceiver.hasWaitingMessages())
+	{
+		ofxOscMessage m;
+		oscReceiver.getNextMessage(&m);
+		ramActorManager::instance().updateWithOscMessage(m);
+	}
+	
+	nodearrays.updateIndexCache();
+	
+	for (int i = 0; i < nodearrays.size(); i++)
+	{
+		const ramNodeArray &array = nodearrays[i];
+		
+		if (array.isOutdated() && !isFreezed() && !array.isPlayback())
+		{
+			if (array.isActor())
+			{
+				ramActor o = array;
+				ofNotifyEvent(actorExit, o);
+			}
+			else
+			{
+				ramRigidBody o = array;
+				ofNotifyEvent(rigidExit, o);
+			}
+			
+			nodearrays.erase(array.getName());
+		}
+	}
+	
+	rootNode.update();
+}
+
+void ramActorManager::draw()
+{
+	rootNode.draw();
+	
+	if (nodeSelector != NULL && nodeSelector->identifer.isValid())
+	{
+		ramNode node;
+		ramNodeFinder finder(nodeSelector->identifer);
+		
+		if (finder.findOne(node))
+		{
+			node.beginTransform();
+			
+			ofPushStyle();
+			ramBillboard();
+			
+			ofFill();
+			ofSetColor(255, 0, 0, 80);
+			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			
+			ofNoFill();
+			ofCircle(0, 0, 10 + sin(ofGetElapsedTimef() * 10) * 5);
+			ofPopStyle();
+			
+			node.endTransform();
+		}
+	}
+}
+
+void ramActorManager::exit()
+{
+	
+}
+
+
+
+#pragma mark -
+#pragma mark accessor: nodearrays
+inline size_t ramActorManager::getNumNodeArray()
+{
+	return nodearrays.size();
+}
+
+inline bool ramActorManager::hasNodeArray(const string &key)
+{
+	return nodearrays.hasKey(key);
+}
+
+inline ramNodeArray& ramActorManager::getNodeArray(const string& name)
+{
+	return nodearrays[name];
+}
+
+inline ramNodeArray& ramActorManager::getNodeArray(int index)
+{
+	return nodearrays[index];
+}
+
+inline vector<ramNodeArray*> ramActorManager::getAllNodeArrays()
+{
+	return nodearrays.all();
+}
+
+inline const vector<string>& ramActorManager::getNodeArrayNames()
+{
+	return nodearrays.keys();
+}
+
+
+#pragma mark -
+#pragma mark !!!:experimental
+void ramActorManager::setNodeArray(const ramNodeArray& NA)
+{
+	nodearrays.set(NA.getName(), NA);
+}
+
+
+#pragma mark -
+#pragma mark mouse picked node
+
+const ramNodeIdentifier& ramActorManager::getLastSelectedNodeIdentifer()
+{
+	return nodeSelector->identifer;
+}
+
+const ramNode* ramActorManager::getLastSelectedNode()
+{
+	const ramNodeIdentifier &node_id = getLastSelectedNodeIdentifer();
+	if (!node_id.isValid()) return NULL;
+	
+	return &getNodeArray(node_id.name).getNode(node_id.index);
+}
+
+const ramNodeArray* ramActorManager::getLastSelectedNodeArray()
+{
+	const ramNodeIdentifier &node_id = getLastSelectedNodeIdentifer();
+	if (!node_id.isValid()) return NULL;
+	
+	return &getNodeArray(node_id.name);
+}
+
+void ramActorManager::clearSelected()
+{
+	nodeSelector->identifer.clear();
+}
+
+
+
+
+#pragma mark -
+#pragma mark freeze/unfreeze all actors
+inline bool ramActorManager::isFreezed() const
+{
+	return freeze;
+}
+
+inline void ramActorManager::setFreezed(bool freezed)
+{
+	freeze = freezed;
+}
+inline void ramActorManager::toggleFreeze()
+{
+	freeze ^= true;
+}
+
+
+
+#pragma mark -
+#pragma mark osc handling
 void ramActorManager::updateWithOscMessage(ofxOscMessage& m)
 {
 	if (isFreezed()) return;
@@ -80,71 +252,28 @@ void ramActorManager::updateWithOscMessage(ofxOscMessage& m)
 	}
 }
 
+void ramActorManager::setupOscReceiver(ramOscManager* oscMan)
+{
+	
+	oscReceiver.addAddress(RAM_OSC_ADDR_ACTOR);
+	oscReceiver.addAddress(RAM_OSC_ADDR_RIGID_BODY);
+	
+	oscMan->addReceiverTag(&oscReceiver);
+}
 
 
 #pragma mark -
-#pragma mark setup, update, draw, exit...
-void ramActorManager::setup()
+#pragma mark nodeselector
+void ramActorManager::onSelectStateChanged(ramNodeIdentifier &e)
 {
-//	nodeSelector = new NodeSelector(rootNode);
+	ofNotifyEvent(selectStateChanged, e);
 }
 
-void ramActorManager::update()
+void ramActorManager::onMouseReleased(ofMouseEventArgs &e)
 {
-	
+	if (!rootNode.hasFocusdObject())
+		nodeSelector->identifer.clear();
 }
-
-void ramActorManager::draw()
-{
-	
-}
-
-void ramActorManager::exit()
-{
-	
-}
-
-
-
-#pragma mark -
-#pragma mark accessor: nodearrays
-inline size_t ramActorManager::getNumNodeArray()
-{
-	return nodearrays.size();
-}
-
-inline vector<ramNodeArray> ramActorManager::getAllNodeArrays()
-{
-	vector<ramNodeArray> r;
-	for (int i = 0; i < getNumNodeArray(); i++)
-		r.push_back(getNodeArray(i));
-	return r;
-}
-
-inline const vector<string>& ramActorManager::getNodeArrayNames()
-{
-	return nodearrays.keys();
-}
-
-inline ramNodeArray& ramActorManager::getNodeArray(int index)
-{
-	return nodearrays[index];
-}
-
-inline ramNodeArray& ramActorManager::getNodeArray(const string& name)
-{
-	return nodearrays[name];
-}
-
-inline bool ramActorManager::hasNodeArray(const string &key)
-{
-	return nodearrays.hasKey(key);
-}
-
-
-
-
-
 
 
 

@@ -6,8 +6,7 @@
 #include "ramInteractivePrimitive.h"
 #include "ramNodeIdentifier.h"
 #include "ramCompoundContainer.h"
-
-
+#include "ramOscManager.h"
 
 class ramActorManager
 {
@@ -22,8 +21,6 @@ public:
 	ofEvent<ramRigidBody> rigidExit;
 	ofEvent<ramNodeIdentifier> selectStateChanged;
 	
-	void updateWithOscMessage(ofxOscMessage& m);
-	
 	void setup();
 	void update();
 	void draw();
@@ -31,15 +28,15 @@ public:
 
 	
 	size_t getNumNodeArray();
-	vector<ramNodeArray> getAllNodeArrays();
-	const vector<string>& getNodeArrayNames();
+	bool hasNodeArray(const string &key);
 	ramNodeArray& getNodeArray(int index);
 	ramNodeArray& getNodeArray(const string& name);
-	bool hasNodeArray(const string &key);
+	vector<ramNodeArray*> getAllNodeArrays();
+	const vector<string>& getNodeArrayNames();
 	
 	
-	// test
-	void setNodeArray(const ramNodeArray& NA) { nodearrays.set(NA.getName(), NA); }
+	// 
+	void setNodeArray(const ramNodeArray& NA);
 	
 	
 	// for mouse picked node
@@ -48,13 +45,11 @@ public:
 	const ramNodeArray* getLastSelectedNodeArray();
 	void clearSelected();
 	
-	// Freeze all actor
-	inline bool isFreezed() { return freeze; }
-	inline void setFreezed(bool v) { freeze = v; }
-	inline void toggleFreeze() { freeze ^= true; }
-
 	
-	
+	//! freeze/unfreeze all actors
+	bool isFreezed() const;
+	void setFreezed(bool freezed);
+	void toggleFreeze();
 	
 private:
 	
@@ -64,14 +59,23 @@ private:
 	
 	
 	/*!
+	 osc
+	 */
+	ramOscReceiveTag oscReceiver;
+	void setupOscReceiver(ramOscManager* oscMan);
+	void updateWithOscMessage(ofxOscMessage& m);
+	
+	
+	/*!
 	 nodeselector
 	 */
 	class NodeSelector;
 	friend class NodeSelector;
 	NodeSelector *nodeSelector;
+	ramInteractivePrimitives::RootNode rootNode;
+	
 	void onSelectStateChanged(ramNodeIdentifier &e);
 	void onMouseReleased(ofMouseEventArgs &e);
-	ramInteractivePrimitives::RootNode rootNode;
 
 
 	

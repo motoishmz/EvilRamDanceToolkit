@@ -44,8 +44,8 @@ public:
 	ramActor(const ramNodeArray &copy);
 	virtual ~ramActor();
 	
-	//! operator
-	ramActor& operator=(const ramNodeArray &copy);
+//	//! operator
+//	ramActor& operator=(const ramNodeArray &copy);
 	
 	//! utils
 	static string getJointName(int jointId) { return jointName[jointId]; }

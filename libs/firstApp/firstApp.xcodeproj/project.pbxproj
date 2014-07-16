@@ -80,6 +80,8 @@
 		9A93128719766CC9000BE009 /* ramBaseFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A93127419766CC9000BE009 /* ramBaseFilter.cpp */; };
 		9A93128819766CC9000BE009 /* ramGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A93127719766CC9000BE009 /* ramGUI.cpp */; };
 		9A93128919766CC9000BE009 /* ramUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A93127919766CC9000BE009 /* ramUnit.cpp */; };
+		9A93128C19766E44000BE009 /* ramNodeSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A93128A19766E44000BE009 /* ramNodeSelector.cpp */; };
+		9A93129519767528000BE009 /* ramOscManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A93129319767528000BE009 /* ramOscManager.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -292,6 +294,11 @@
 		9A93127919766CC9000BE009 /* ramUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramUnit.cpp; sourceTree = "<group>"; };
 		9A93127B19766CC9000BE009 /* ramGlobalShortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGlobalShortcuts.h; sourceTree = "<group>"; };
 		9A93127C19766CC9000BE009 /* ramUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramUnit.h; sourceTree = "<group>"; };
+		9A93128A19766E44000BE009 /* ramNodeSelector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramNodeSelector.cpp; sourceTree = "<group>"; };
+		9A93128B19766E44000BE009 /* ramNodeSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramNodeSelector.h; sourceTree = "<group>"; };
+		9A9312911976717E000BE009 /* ramGraphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramGraphics.h; sourceTree = "<group>"; };
+		9A93129319767528000BE009 /* ramOscManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ramOscManager.cpp; sourceTree = "<group>"; };
+		9A93129419767528000BE009 /* ramOscManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramOscManager.h; sourceTree = "<group>"; };
 		9AF6DBCE19752A420072A9EF /* ramMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ramMain.h; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -586,6 +593,7 @@
 			children = (
 				9A93126D19766CC9000BE009 /* ramConstants.h */,
 				9A93125819766CC9000BE009 /* actorManager */,
+				9A93129219767519000BE009 /* oscManager */,
 				9A93126E19766CC9000BE009 /* sceneManager */,
 			);
 			path = core;
@@ -594,10 +602,10 @@
 		9A93125819766CC9000BE009 /* actorManager */ = {
 			isa = PBXGroup;
 			children = (
-				9A93125919766CC9000BE009 /* entity */,
-				9A93126119766CC9000BE009 /* node */,
 				9A93126819766CC9000BE009 /* ramActorManager.cpp */,
 				9A93126919766CC9000BE009 /* ramActorManager.h */,
+				9A93125919766CC9000BE009 /* entity */,
+				9A93126119766CC9000BE009 /* node */,
 				9A93126A19766CC9000BE009 /* utility */,
 			);
 			path = actorManager;
@@ -635,6 +643,8 @@
 			children = (
 				9A93126B19766CC9000BE009 /* ramCompoundContainer.cpp */,
 				9A93126C19766CC9000BE009 /* ramCompoundContainer.h */,
+				9A93128A19766E44000BE009 /* ramNodeSelector.cpp */,
+				9A93128B19766E44000BE009 /* ramNodeSelector.h */,
 			);
 			path = utility;
 			sourceTree = "<group>";
@@ -678,6 +688,23 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		9A9312901976717E000BE009 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				9A9312911976717E000BE009 /* ramGraphics.h */,
+			);
+			path = graphics;
+			sourceTree = "<group>";
+		};
+		9A93129219767519000BE009 /* oscManager */ = {
+			isa = PBXGroup;
+			children = (
+				9A93129319767528000BE009 /* ramOscManager.cpp */,
+				9A93129419767528000BE009 /* ramOscManager.h */,
+			);
+			path = oscManager;
+			sourceTree = "<group>";
+		};
 		9AF6DBBB19752A420072A9EF /* ram */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,6 +712,7 @@
 				9A93125719766CC9000BE009 /* core */,
 				9A93127319766CC9000BE009 /* filters */,
 				9A93127619766CC9000BE009 /* gui */,
+				9A9312901976717E000BE009 /* graphics */,
 				9A93127A19766CC9000BE009 /* utils */,
 			);
 			path = ram;
@@ -910,6 +938,7 @@
 				9A185B54197557B700E2629F /* OscOutboundPacketStream.cpp in Sources */,
 				9A3F230C1974DD6300F2E9F9 /* ofxUIRangeSlider.cpp in Sources */,
 				9A3F232A1974DDC100F2E9F9 /* tinyxmlparser.cpp in Sources */,
+				9A93129519767528000BE009 /* ramOscManager.cpp in Sources */,
 				9A3F23011974DD6300F2E9F9 /* ofxUIImageSlider.cpp in Sources */,
 				9A93128219766CC9000BE009 /* ramNode.cpp in Sources */,
 				9A3F22FC1974DD6300F2E9F9 /* ofxUIFPS.cpp in Sources */,
@@ -929,6 +958,7 @@
 				9A3F23101974DD6300F2E9F9 /* ofxUISlider.cpp in Sources */,
 				9A185B50197557B700E2629F /* ofxOscSender.cpp in Sources */,
 				9A3F23021974DD6300F2E9F9 /* ofxUIImageToggle.cpp in Sources */,
+				9A93128C19766E44000BE009 /* ramNodeSelector.cpp in Sources */,
 				9A3F230D1974DD6300F2E9F9 /* ofxUIRectangle.cpp in Sources */,
 				9A3F22F91974DD6300F2E9F9 /* ofxUIDragableLabelButton.cpp in Sources */,
 				9A3F22F71974DD6300F2E9F9 /* ofxUICanvas.cpp in Sources */,
