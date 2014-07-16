@@ -5,7 +5,6 @@
 #endif
 
 
-
 #pragma mark -
 #pragma mark Sigleton
 ramGUI *ramGUI::our_instance = NULL;
@@ -40,9 +39,9 @@ void ramGUI::setup()
     gui_tab_bar = new ofxUITabBar();
 	gui_panels.clear();
 	
-	//! ここでdefaultの3枚を追加
+	//! !!!: ここでdefaultの3枚を追加
 	
-	for(int i = 0; i < 10; i++)
+	for(int i = 0; i < 3; i++)
     {
         string index = ofToString(i);
 		
@@ -57,6 +56,7 @@ void ramGUI::setup()
         gui_panels.push_back(gui);
     }
 	
+	gui_tab_bar->addSpacer();
 	gui_ready = true;
 }
 
@@ -65,7 +65,7 @@ void ramGUI::addPanel(ramUnit* unit)
 {
 	if (!ready())
 	{
-		ofLogWarning(__FUNCTION__) << "Skipped adding panel because GUI is not ready. Call ramGUI::setup() first.";
+		ofLogError("ramGUI::addPanel") << "Skipped adding panel because GUI is not ready. Call ramGUI::setup() first.";
 		return;
 	}
 	

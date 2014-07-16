@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include "ramUnit.h"
-#include "ramActor.h"
 
+class ramActor;
+class ramRigidBody;
 
 class ramBaseScene : public ramUnit
 {

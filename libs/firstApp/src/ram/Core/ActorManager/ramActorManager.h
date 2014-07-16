@@ -1,5 +1,6 @@
 #pragma once
 #include "ofEvents.h"
+#include "ofxOscMessage.h"
 
 class ramActor;
 class ramRigidBody;
@@ -15,8 +16,16 @@ public:
 	ofEvent<ramActor> actorExit;
 	ofEvent<ramRigidBody> rigidEnter;
 	ofEvent<ramRigidBody> rigidExit;
+	
+	void updateWithOscMessage(ofxOscMessage& m);
+	
+	void setup();
 
 private:
+	
+	void update(ofEventArgs &e);
+	void draw(ofEventArgs &e);
+	void exit(ofEventArgs &e);
 	
 	static ramActorManager *our_instance;
 	ramActorManager();
