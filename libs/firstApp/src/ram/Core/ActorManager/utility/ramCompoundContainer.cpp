@@ -3,26 +3,31 @@
 
 #pragma mark -
 #pragma mark ...
-void ramCompoundContainer::set(const string &key, const ramNodeArray &o)
+
+template <typename T>
+void ramCompoundContainer<T>::set(const string &key, const T &o)
 {
 	hash[key] = o;
 	updateIndexCache();
 }
 
-void ramCompoundContainer::erase(const string &key)
+template <typename T>
+void ramCompoundContainer<T>::erase(const string &key)
 {
 	hash.erase(key);
 	updateIndexCache();
 }
 
-void ramCompoundContainer::clear()
+template <typename T>
+void ramCompoundContainer<T>::clear()
 {
 	array.clear();
 	hash.clear();
 	hash_keys.clear();
 }
 
-size_t ramCompoundContainer::size()
+template <typename T>
+size_t ramCompoundContainer<T>::size()
 {
 	return array.size();
 }
@@ -31,12 +36,14 @@ size_t ramCompoundContainer::size()
 #pragma mark -
 #pragma mark array
 
-ramNodeArray& ramCompoundContainer::operator[](size_t index)
+template <typename T>
+T& ramCompoundContainer<T>::operator[](size_t index)
 {
 	return *array[index];
 }
 
-const vector<ramNodeArray*> ramCompoundContainer::all()
+template <typename T>
+const vector<T*> ramCompoundContainer<T>::all()
 {
 	return array;
 }
@@ -44,7 +51,8 @@ const vector<ramNodeArray*> ramCompoundContainer::all()
 
 #pragma mark -
 #pragma mark map
-ramNodeArray& ramCompoundContainer::operator[](const string& key)
+template <typename T>
+T& ramCompoundContainer<T>::operator[](const string& key)
 {
 	if (hasKey(key))
 	{
@@ -57,12 +65,14 @@ ramNodeArray& ramCompoundContainer::operator[](const string& key)
 	}
 }
 
-const vector<string>& ramCompoundContainer::keys()
+template <typename T>
+const vector<string>& ramCompoundContainer<T>::keys()
 {
 	return hash_keys;
 }
 
-bool ramCompoundContainer::hasKey(const string& key)
+template <typename T>
+bool ramCompoundContainer<T>::hasKey(const string& key)
 {
 	return hash.find(key) != hash.end();
 }
@@ -70,7 +80,8 @@ bool ramCompoundContainer::hasKey(const string& key)
 
 #pragma mark -
 #pragma mark ...
-void ramCompoundContainer::updateIndexCache()
+template <typename T>
+void ramCompoundContainer<T>::updateIndexCache()
 {
 	array.clear();
 	hash_keys.clear();

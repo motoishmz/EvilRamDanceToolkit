@@ -53,7 +53,7 @@ public:
 	
 private:
 	
-	ramCompoundContainer nodearrays;
+	ramCompoundContainer<ramNodeArray> nodearrays;
 	
 	bool freeze;
 	

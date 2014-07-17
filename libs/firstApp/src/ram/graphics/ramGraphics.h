@@ -3,6 +3,7 @@
 #include "ofMain.h"
 
 #include "ramActor.h"
+#include "ramRigidBody.h"
 
 #pragma mark - ramColor
 

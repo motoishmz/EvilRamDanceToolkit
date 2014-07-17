@@ -1,5 +1,5 @@
 // 
-// ramBaseFilter.cpp - RAMDanceToolkit
+// ramTSVCoder.h - RAMDanceToolkit
 // 
 // Copyright 2012-2013 YCAM InterLab, Yoshito Onishi, Satoru Higa, Motoi Shimizu, and Kyle McDonald
 // 
@@ -15,29 +15,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ramBaseFilter.h"
+#pragma once
 
-const ramNodeArray& ramBaseFilter::operator()(const ramNodeArray& src)
+#include "ramBaseCoder.h"
+#include "ramSession.h"
+
+class ramTSVCoder : public ramBaseCoder
 {
-	return update(src);
-}
-
-const ramNodeArray& ramBaseFilter::update(const ramNodeArray& src)
-{
-	
-	if (cache.getNumNode() != src.getNumNode())
-		cache = src;
-	
-	const int f = ofGetFrameNum();
-	if (last_update_frame != f)
-	{
-		last_update_frame = f;
-		cache = filter(src);
-	}
-	
-	return cache;
-}
-
-const ramNodeArray& ramBaseFilter::get(size_t index) const { return cache; }
-size_t ramBaseFilter::getSize() const { return 1; }
+protected:
+	void decode(ofBuffer buffer);
+	bool encode(ramSession &src);
+};
 

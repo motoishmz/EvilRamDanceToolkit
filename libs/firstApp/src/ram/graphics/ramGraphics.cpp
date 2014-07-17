@@ -2,7 +2,6 @@
 #include "ramGraphics.h"
 #include "ramPhysics.h"
 #include "ramPrimitive.h"
-#include "ramUtils.h"
 
 #pragma mark - ramColor
 
@@ -39,7 +38,7 @@ const ofColor ramColor::SHADOW          = ofColor(0, 0, 0, 60);
 void ramBox(const ramNode& o, float size)
 {
 	o.beginTransform();
-	ofBox(size);
+	ofDrawBox(size);
 	o.endTransform();
 
 	if (ramGetEnablePhysicsPrimitive()
@@ -54,7 +53,7 @@ void ramBox(const ramNode& o, float size)
 void ramSphere(const ramNode& o, float radius)
 {
 	o.beginTransform();
-	ofSphere(radius);
+	ofDrawSphere(radius);
 	o.endTransform();
 
 	if (ramGetEnablePhysicsPrimitive())
@@ -216,7 +215,7 @@ void ramDrawActorCube(ramNodeArray& nodeArray)
 		ofTranslate(axis.x, axis.y, axis.z);
 		ofScale(scale.x, scale.y, scale.z);
 		ofNoFill();
-		ofBox(1);
+		ofDrawBox(1);
 	}
 	ofPopMatrix();
 	ofPopStyle();

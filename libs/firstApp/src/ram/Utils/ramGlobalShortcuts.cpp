@@ -1,4 +1,8 @@
 #include "ramGlobalShortcuts.h"
+#include "ramSimpleShadow.h"
+
+
+static ramSimpleShadow ram_simple_shadow;
 
 
 #pragma mark -

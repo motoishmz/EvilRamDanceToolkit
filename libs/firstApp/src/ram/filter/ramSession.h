@@ -20,7 +20,7 @@
 #include "ofxUI.h"
 #include "ramActorManager.h"
 #include "ramActor.h"
-#include "ramGlobal.h"
+#include "ramGlobalShortcuts.h"
 #include "ramNodeArrayBuffer.h"
 #include "ramBaseFilter.h"
 

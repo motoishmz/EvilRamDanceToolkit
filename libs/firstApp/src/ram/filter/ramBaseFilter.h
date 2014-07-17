@@ -20,6 +20,7 @@
 #include "ofMain.h"
 #include "ramUnit.h"
 #include "ramActor.h"
+#include "ramCompoundContainer.h"
 
 class ramBaseFilter : public ramUnit
 {
@@ -37,32 +38,6 @@ private:
 	int last_update_frame;
 };
 
-//
-
-class ramBusSend : public ramBaseFilter
-{
-public:
-
-	string getName() const;
-	ramBusSend();
-	ramBusSend(const string &bus_name);
-
-	void setBusName(const string &bus_name);
-	const string& getBusName() const;
-
-	const ramNodeArray& get(size_t index = 0) const;
-	size_t getSize() const;
-
-protected:
-
-	const ramNodeArray& filter(const ramNodeArray& src);
-
-private:
-
-	string bus_name;
-};
-
-//
 
 template <typename FilterClass>
 class ramFilterEach

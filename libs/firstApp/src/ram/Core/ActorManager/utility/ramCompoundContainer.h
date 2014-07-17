@@ -2,25 +2,26 @@
 
 #include "ramNodeArray.h"
 
+template <typename T>
 class ramCompoundContainer
 {
 	
-	typedef std::map<string, ramNodeArray> MapType;
-	typedef vector<ramNodeArray*> ArrayType;
+	typedef std::map<string, T> MapType;
+	typedef vector<T*> ArrayType;
 	
 public:
 	
-	void set(const string &key, const ramNodeArray &o);
+	void set(const string &key, const T &o);
 	void erase(const string &key);
 	void clear();
 	size_t size();
 	
 	//! array
-	ramNodeArray& operator[](size_t index);
-	const vector<ramNodeArray*> all();
+	T& operator[](size_t index);
+	const vector<T*> all();
 	
 	//! map
-	ramNodeArray& operator[](const string& key);
+	T& operator[](const string& key);
 	const vector<string>& keys();
 	bool hasKey(const string& key);
 	

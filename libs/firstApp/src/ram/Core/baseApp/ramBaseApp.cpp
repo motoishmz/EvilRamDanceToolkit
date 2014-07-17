@@ -113,11 +113,12 @@ void ramBaseApp::drawNodeArrays()
 
 void ramBaseApp::drawFloor()
 {
+	// !!!:
+	cout << ".";
 	
-	
-	ramDrawBasicFloor(ramGetGUI().getPreferencesTab().getFloorPattern(),
-					  ramGetGUI().getPreferencesTab().getFloorSize(),
-					  ramGetGUI().getPreferencesTab().getFloorGridSize(),
-					  ramColor::GRAY_ALPHA,
-					  ramColor::DARK_GRAY_ALPHA);
+//	ramDrawBasicFloor(ramGetGUI().getPreferencesTab().getFloorPattern(),
+//					  ramGetGUI().getPreferencesTab().getFloorSize(),
+//					  ramGetGUI().getPreferencesTab().getFloorGridSize(),
+//					  ramColor::GRAY_ALPHA,
+//					  ramColor::DARK_GRAY_ALPHA);
 }
